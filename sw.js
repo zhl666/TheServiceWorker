@@ -1,4 +1,4 @@
-self.addEventListener('install', (e) => {
+self.addEventListener('install', e => {
   e.waitUntil(
     caches.open('v1').then(cache => {
       return cache.addAll([
@@ -9,3 +9,12 @@ self.addEventListener('install', (e) => {
     })
   );
 });
+
+self.addEventListener('activate', e => {
+  console.log('v1 no ready to handle fetches!')
+});
+
+self.addEventListener('fetch', e => {
+  const url = new URL(e.request.url);
+  console.log(url)
+})
