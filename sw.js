@@ -18,6 +18,7 @@ self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
   console.log(url)
   console.log(caches)
+  console.log(caches.match(url.pathname))
   if(url.origin == location.origin && /.(js|css|jpg|png)$/.test(url.pathname)) {
     e.respondWith(caches.match(url.pathname))
   }
