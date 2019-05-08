@@ -17,4 +17,6 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
   console.log(url)
+  console.log(caches)
+  e.respondWith(caches.match(url.pathname))
 })
