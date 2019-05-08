@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>test the service worker page.</title>
+<link rel="stylesheet" href="static/css/index.css">
+<script src="static/js/antd1.min.js"></script>
+<script src="static/js/antd2.min.js"></script>
+</head>
+<body>
+  测试文件
+<div id="main"></div>
+<script>
+(function() {
+  // 设置缓存文件
+  if('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').then(reg => {
+      if(reg.installing) {
+        console.log('Service worker installing');
+      } else if(reg.waiting) {
+        console.log('Service worker installed');
+      } else if(reg.active) {
+        console.log('Service worker active');
+      }
+      console.log(reg.scope);
+    }).catch(error => {
+      console.log('Registration failed with' + error);
+    });
+  }
+})();  
+</script>
+</body>
+</html>
