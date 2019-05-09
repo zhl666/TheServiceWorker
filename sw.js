@@ -1,12 +1,25 @@
 self.addEventListener('install', e => {
   e.waitUntil(
-    caches.open('test_v1').then(cache => {
-      return cache.addAll([
-        '/serviceworker/static/js/jquery-3.1.1.min.js',
-        '/serviceworker/static/css/index.css',
-        '/serviceworker/static/images/dbc88cfeintro-img-2.jpg',
-      ]);
-    })
+    Promise.all([
+      caches.open('test_v1').then(cache => {
+        return cache.addAll([
+          '/serviceworker/static/js/jquery-3.1.1.min.js',
+          '/serviceworker/static/css/index.css',
+          '/serviceworker/static/images/dbc88cfeintro-img-2.jpg',
+        ]);
+      }),
+      // 清理旧版本
+      cackes.keys().then(cacheList => {
+        return Promise.all(
+          cacheList.map(cacheName => {
+            if(cacheName != 'test_v1') {
+              console.log('清理', cacheName);
+              return caches.delete(cacheName);
+            }
+          })
+        )
+      })
+    ])
   );
 });
 
