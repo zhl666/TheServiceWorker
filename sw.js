@@ -1,6 +1,6 @@
 self.addEventListener('install', e => {
   e.waitUntil(
-    caches.open('v1').then(cache => {
+    caches.open('test_v1').then(cache => {
       return cache.addAll([
         '/serviceworker/static/js/jquery-3.1.1.min.js',
         '/serviceworker/static/css/index.css',
