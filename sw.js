@@ -1,7 +1,7 @@
 self.addEventListener('install', e => {
   e.waitUntil(
     Promise.all([
-      caches.open('test_v1').then(cache => {
+      caches.open('v2').then(cache => {
         return cache.addAll([
           '/serviceworker/static/js/jquery-3.1.1.min.js',
           '/serviceworker/static/css/index.css',
@@ -12,7 +12,7 @@ self.addEventListener('install', e => {
       caches.keys().then(cacheList => {
         return Promise.all(
           cacheList.map(cacheName => {
-            if(cacheName != 'test_v1') {
+            if(cacheName != 'v2') {
               console.log('清理', cacheName);
               return caches.delete(cacheName);
             }
