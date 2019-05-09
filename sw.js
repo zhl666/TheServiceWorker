@@ -9,7 +9,7 @@ self.addEventListener('install', e => {
         ]);
       }),
       // 清理旧版本
-      cackes.keys().then(cacheList => {
+      caches.keys().then(cacheList => {
         return Promise.all(
           cacheList.map(cacheName => {
             if(cacheName != 'test_v1') {
